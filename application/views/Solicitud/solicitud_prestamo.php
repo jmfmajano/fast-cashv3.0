@@ -73,7 +73,7 @@
                         <div class="mar_che_cobrar">
                             <label for="cobra_mora">Cobrar mora</label><br>
                             <div class="checkbox checkbox-success checkbox-inline">
-                                <input onclick="mora()" type="checkbox" value="" id="cobra_moraC" name="">
+                                <input onclick="mora()" type="checkbox" value="" checked="true" id="cobra_moraC" name="">
                                 <label for="cobra_mora">Cobrar</label>
                             </div>
                         </div>  
