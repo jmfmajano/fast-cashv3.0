@@ -24,8 +24,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
+<<<<<<< HEAD
 $config['base_url'] = 'http://localhost/www/fast-cashv3.0/';
 //$config['base_url'] = 'http://192.168.1.100/fast-cash/';
+=======
+// $config['base_url'] = 'http://localhost/www/fast-cash/';
+$config['base_url'] = 'http://localhost/Trabajo_Fast_Cash/fast-cashv3.0/';
+// $config['base_url'] = 'http://192.168.1.100/fast-cash/';
+>>>>>>> 440452d8010c16f0f7a7e97ef61b4e0e491a0cc9
 
 /*
 |--------------------------------------------------------------------------
