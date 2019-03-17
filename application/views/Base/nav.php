@@ -65,7 +65,7 @@
                                 <a href="<?= base_url() ?>Home/Main" class="waves-effect active"><i class="fa fa-home fa-lg"></i><span> Inicio</span></a>
                             </li>
                         <?php
-                            $conn = mysqli_connect("localhost", "root", "123456", "db_fastcash");
+                            $conn = mysqli_connect("localhost", "root", "", "db_fastcash");
                             if (!$conn){die("Connection failed: " . mysqli_connect_error());}
                             else{
                                 mysqli_query($conn, "SET CHARACTER SET 'utf8'");
