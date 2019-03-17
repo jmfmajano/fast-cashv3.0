@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2019 a las 01:10:00
--- Versión del servidor: 10.1.33-MariaDB
--- Versión de PHP: 7.2.6
+-- Tiempo de generación: 17-03-2019 a las 02:09:43
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -211,6 +211,30 @@ INSERT INTO `tbl_caja_general` (`idCajaChica`, `estadoCajaChica`, `fechaCajaChic
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tbl_categoria_cuenta`
+--
+
+CREATE TABLE `tbl_categoria_cuenta` (
+  `idCategoria` int(11) NOT NULL,
+  `codigoCategoria` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `nombreCategoria` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_categoria_cuenta`
+--
+
+INSERT INTO `tbl_categoria_cuenta` (`idCategoria`, `codigoCategoria`, `nombreCategoria`) VALUES
+(1, '1', 'ACTIVO'),
+(2, '2', 'PASIVO'),
+(3, '3', 'PATRIMONIO DE LOS ACCIONISTAS'),
+(4, '4', 'CUENTAS DE RESULTADO DEUDOR'),
+(5, '5', 'CUENTAS DE RESULTADO ACREEDORAS'),
+(6, '6', 'PÉRDIDAS Y GANANCIAS');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tbl_clientes`
 --
 
@@ -305,6 +329,429 @@ INSERT INTO `tbl_creditos` (`idCredito`, `codigoCredito`, `tipoCredito`, `codigo
 (25, 'EE2019182', 'Crédito popular', ' ', '150.00', '0.00', '0.00', 'Proceso', '2019-02-04', '2019-03-04', 1, '2019-02-18 15:52:39', 34),
 (26, 'JYMA2019182', 'Crédito popular', ' ', '150.00', '0.00', '0.00', 'Proceso', '2019-02-08', '2019-04-08', 1, '2019-02-18 16:06:42', 35),
 (27, 'RC2019182', 'Crédito popular', ' ', '100.00', '0.00', '0.00', 'Proceso', '2019-02-09', '2019-03-09', 1, '2019-02-18 16:33:42', 36);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_cuenta`
+--
+
+CREATE TABLE `tbl_cuenta` (
+  `idCuenta` int(11) NOT NULL,
+  `idSubcategoria` int(11) NOT NULL,
+  `codigoCuenta` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `NombreCuenta` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_cuenta`
+--
+
+INSERT INTO `tbl_cuenta` (`idCuenta`, `idSubcategoria`, `codigoCuenta`, `NombreCuenta`) VALUES
+(1, 1, '1101', 'Efectivo y Equivalentes'),
+(2, 1, '110101', 'Fondo de Caja Chica'),
+(3, 1, '110102', 'Caja General'),
+(4, 1, '110103', 'Bancos Cuentas Corritentes'),
+(5, 1, '11010301', 'Banco Cuscatlán, S.A.'),
+(6, 1, '11010302', 'Banco Promerica, S.A.'),
+(7, 1, '11010303', 'Banco Hipotecario de El Salvador, S.A. Cta Cte 004'),
+(8, 1, '110104', 'Bancos Cuentas de Ahorro'),
+(9, 1, '11010401', 'Banco Cuscatlán, S.A.'),
+(10, 1, '110105', 'Bancos Depositos a Plazo'),
+(11, 1, '11010501', 'Banco Cuscatlán, S.A.'),
+(12, 1, '110106', 'Otros Equivalentes de Efectivo'),
+(13, 1, '11010601', 'Reportos'),
+(14, 1, '110107', 'Fondo de Caja General'),
+(15, 1, '1102', 'Cuentas y Documentos por Cobrar'),
+(16, 1, '110201', 'Préstamos'),
+(17, 1, '11020101', 'Prestamos pactados hasta 1 año plazo'),
+(18, 1, '1102010101', 'Prestamos populares'),
+(19, 1, '1102010102', 'Prestamos personales'),
+(20, 1, '1102010103', 'Prestamos prendarios'),
+(21, 1, '1102010104', 'Prestamos hipotecarios'),
+(22, 1, '1102010110', 'Refinanciamientos'),
+(23, 1, '11020102', 'Prestamos pactados hasta más de 1 año plazo'),
+(24, 1, '1102010201', 'Prestamos populares'),
+(25, 1, '1102010202', 'Prestamos personales'),
+(26, 1, '1102010203', 'Prestamos prendarios'),
+(27, 1, '1102010204', 'Prestamos hipotecarios'),
+(28, 1, '1102010205', 'Prestamos rotativos'),
+(29, 1, '1102010210', 'Refinanciamientos'),
+(30, 1, '11020103', 'Desembolsos y Recuperaciones por Aplicar'),
+(31, 1, '11020104', 'Prestamos vencidos'),
+(32, 1, '11020105', 'Prestamos en cobro judicial'),
+(33, 1, '11020106', 'Intereses por cobrar'),
+(34, 1, '1102010601', 'Intereses corrientes'),
+(35, 1, '1102010602', 'Intereses en mora'),
+(36, 1, '110202', 'Documentos por Cobrar'),
+(37, 1, '110203', 'Cuentas por cobrar comerciales'),
+(38, 1, '110204', 'Dividendos por Cobrar'),
+(39, 1, '110205-R', 'Reserva para Cuentas Incobrables'),
+(40, 1, '110205-R01', 'Reserva para saneamiento de créditos vencidos'),
+(41, 1, '110206', 'Anticipos a Proveedores'),
+(42, 1, '110207', 'Prestamos al Personal'),
+(43, 1, '110208', 'Anticipos a Empleados'),
+(44, 1, '11020801', 'Anticipos a Empleados'),
+(45, 1, '11020802', 'Faltantes a cajeros'),
+(46, 1, '110209', 'Prestamos a Socios'),
+(47, 1, '110210', 'Otras Cuentas por Cobrar'),
+(48, 1, '1103', 'Cuentas por Cobrar - Arrendamiento Financiero'),
+(49, 1, '110301', 'Arrendamientos Financieros por Cobrar'),
+(50, 1, '1104', 'Partes Relacionadas'),
+(51, 1, '110401', 'Directivos, Ejecutivos y Empleados'),
+(52, 1, '110402', 'Compañías Afiliadas'),
+(53, 1, '110403', 'Compañías Asociadas'),
+(54, 1, '110404', 'Compañías Subsidiarias'),
+(55, 1, '110405', 'Compañías Relacionadas'),
+(56, 1, '1105', 'Accionistas'),
+(57, 1, '110501', 'Acciones Suscritas y no Pagadas'),
+(58, 1, '1106', 'Crédito Fiscal - IVA'),
+(59, 1, '110601', 'IVA por Importaciones'),
+(60, 1, '110602', 'IVA por Compras Locales'),
+(61, 1, '110603', 'IVA Diferido'),
+(62, 1, '110604', 'Excedente de Credito Fiscal'),
+(63, 1, '110605', '1%  IVA Retenido'),
+(64, 1, '110606', '1%  IVA Percibido'),
+(65, 1, '1107', 'Inventarios'),
+(66, 1, '110701', ''),
+(67, 1, '110705 - R', 'Reserva por Obsolescencia de Mercaderías'),
+(68, 1, '110706', 'Pedidos en Tránsito'),
+(69, 1, '1108', 'Inversiones Temporales'),
+(70, 1, '1109', 'Pagos Anticipados'),
+(71, 1, '110901', 'Alquileres Anticipados'),
+(72, 1, '110902', 'Papelería y Utiles'),
+(73, 1, '110903', 'Intereses'),
+(74, 1, '110904', 'Seguros Vigentes'),
+(75, 1, '11090401', 'Seguro de Vehiculos'),
+(76, 1, '11090402', 'Seguro contra Robo'),
+(77, 1, '11090403', 'Seguro contra Incendio'),
+(78, 1, '11090404', 'Seguro por Importacion de Mercaderia'),
+(79, 1, '110905', 'Impuestos pagados por Anticipado'),
+(80, 1, '11090501', 'Pago a cuenta del ejercicio corriente'),
+(81, 1, '11090502', 'ISR de Ejercicios Anteriores'),
+(82, 1, '11090503', 'Retenciones por Operaciones Financieras'),
+(83, 2, '1201', 'Propiedad, Planta y Equipo'),
+(84, 2, '120101', 'Bienes Inmuebles'),
+(85, 2, '12010101', 'Terrenos'),
+(86, 2, '12010102', 'Edificaciones'),
+(87, 2, '12010103', 'Mejoras en Propiedades Arrendadas'),
+(88, 2, '12010104', 'Instalaciones Permanentes'),
+(89, 2, '120102', 'Bienes Muebles'),
+(90, 2, '12010201', 'Mobiliario y Equipo de Sala de Ventas'),
+(91, 2, '12010202', 'Mobiliario y Equipo de Oficina'),
+(92, 2, '12010203', 'Equipo de Transporte'),
+(93, 2, '12010204', 'Equipo de Cómputo'),
+(94, 2, '12010205', 'Otros Bienes Depreciables'),
+(95, 2, '120103-R', 'Depreciaciones Acumuladas'),
+(96, 2, '120103-R-01', 'Edificaciones'),
+(97, 2, '120103-R-02', 'Mejoras en Propiedades Arrendadas'),
+(98, 2, '120103-R-03', 'Instalaciones Permanente'),
+(99, 2, '120103-R-04', 'Mobiliario y Equipo de Sala de Ventas'),
+(100, 2, '120103-R-05', 'Mobiliario y Equipo de Oficina'),
+(101, 2, '120103-R-06', 'Equipo de Transporte'),
+(102, 2, '120103-R-07', 'Equipo de Cómputo'),
+(103, 2, '120103-R-08', 'Otros Bienes Depreciables'),
+(104, 2, '120104', 'Revaluaciones de Activo Fijo'),
+(105, 2, '12010401', 'Terrenos'),
+(106, 2, '12010402', 'Edificaciones'),
+(107, 2, '12010403', 'Instalaciones Permanentes'),
+(108, 2, '12010404', 'Mobiliario y Equipo de Sala de Venta'),
+(109, 2, '12010405', 'Mobiliario y Equipo de Oficina'),
+(110, 2, '12010406', 'Equipo de Transporte'),
+(111, 2, '12010407', 'Equipo de Cómputo'),
+(112, 2, '120105', 'Pedidos en Tránsito - Activo Fijo'),
+(113, 2, '1202', 'Inversiones Permanentes'),
+(114, 2, '120201', 'Inversiones en Subsidiarias'),
+(115, 2, '120202', 'Inversiones en Asociadas'),
+(116, 2, '120203', 'Inversiones en Negocios Conjuntos'),
+(117, 2, '1203', 'Activos Diferidos'),
+(118, 2, '120301', 'Crédito ISR años anteriores'),
+(119, 2, '120302', 'Pagos Anticipados ISR'),
+(120, 2, '120303', 'Activo por ISR - Diferido'),
+(121, 2, '120304', 'Otros Activos Diferidos'),
+(122, 2, '1204', 'Activos Intangibles'),
+(123, 2, '120401', 'Patentes y Marcas'),
+(124, 2, '120402', 'Licencias y Concesiones'),
+(125, 2, '12040201', 'Sistemas computacinales - SOFTWARE'),
+(126, 2, '120403-R', 'Amortización Licencias de Sofware'),
+(127, 2, '1205', 'Cuentas por Cobrar a Largo Plazo'),
+(128, 2, '1206', 'Préstamos a Accionistas a Largo Plazo'),
+(129, 2, '1207', 'Otras Cuentas por Cobrar a Largo Plazo'),
+(130, 2, '1208', 'Depósitos en Garantía'),
+(131, 2, '1209', 'Cuentas por Cobrar Arrendamientos Financieros Larg'),
+(132, 2, '1210', 'Partes Relacionadas a Largo Plazo'),
+(133, 3, '2101', 'Préstamos y Sobregiros Bancarios'),
+(134, 3, '210101', 'Sobregiros Bancarios'),
+(135, 3, '210102', 'Préstamos a Corto Plazo'),
+(136, 3, '210103', 'Porción Circulante - Préstamos a Largo Plazo'),
+(137, 3, '2102', 'Cuentas y Documentos por Pagar'),
+(138, 3, '210201', 'Proveedores Locales'),
+(139, 3, '21020101', 'Guilermo Antonio Rodriguez'),
+(140, 3, '21020102', 'Emerson Giovanni Gomez'),
+(141, 3, '21020103', 'Infored, S.A. de C.V.'),
+(142, 3, '21020104', 'Harold Antonio Argueta Hernandez'),
+(143, 3, '210202', 'Proveedores Extranjeros'),
+(144, 3, '210203', 'Acreedores Diversos'),
+(145, 3, '21020301', 'Maria Guadalupe Iraheta de Martinez'),
+(146, 3, '210204', 'Documentos por Pagar:'),
+(147, 3, '21020401', 'Contratos a Corto Plazo'),
+(148, 3, '21020402', 'Cartas de Crédito'),
+(149, 3, '2103', 'Obligaciones Bajo Arrendamiento Financiero'),
+(150, 3, '210301', 'Porción Circulante de Obligaciones de Arrendamient'),
+(151, 3, '2104', 'Provisiones y Retenciones'),
+(152, 3, '210401', 'Provisiones'),
+(153, 3, '21040101', 'Impuestos Municipales'),
+(154, 3, '21040102', 'Provisión Pago a Cuenta ISR'),
+(155, 3, '21040103', 'Intereses por Pagar'),
+(156, 3, '21040104', 'Impuesto sobre la renta del ejercicio corriente'),
+(157, 3, '210402', 'Gastos Acumulados por Pagar'),
+(158, 3, '21040201', 'Alquileres'),
+(159, 3, '21040202', 'Energia Eléctrica'),
+(160, 3, '21040203', 'Servicios de Agua Potable'),
+(161, 3, '21040204', 'Comunicaciones'),
+(162, 3, '21040205', 'Gastos de Caja Chica'),
+(163, 3, '21040206', 'Honorarios Profesionales'),
+(164, 3, '21040207', 'Publicidad'),
+(165, 3, '21040208', 'Gastos de Combustible'),
+(166, 3, '210403', 'Retenciones'),
+(167, 3, '21040301', 'Cotizaciones Seguro Social'),
+(168, 3, '21040302', 'Seguro Social - Pensiones'),
+(169, 3, '21040303', 'Fondo Social para la Vivienda'),
+(170, 3, '21040304', 'ISR Retenido'),
+(171, 3, '2104030401', 'Retenciones de Carácter Permanente'),
+(172, 3, '2104030402', 'Retenciones de Carácter Eventual'),
+(173, 3, '2104030403', 'Otras Retenciones'),
+(174, 3, '2104030404', 'Retencion por Servicios de Arrendamiento a Persona'),
+(175, 3, '21040305', 'Bancos y Otras Instituciones'),
+(176, 3, '2104030501', 'Banco Agricola, S.A.'),
+(177, 3, '2104030502', 'Banco HSBC de El Salvador, S.A.'),
+(178, 3, '2104030503', 'Banco Promerica, S.A.'),
+(179, 3, '2104030504', 'Banco de America Central, S.A.'),
+(180, 3, '21040306', 'Vialidad a Empleados'),
+(181, 3, '21040307', 'Procuraduría General'),
+(182, 3, '21040308', 'Pensiones'),
+(183, 3, '2104030801', 'AFP Confia, S.A.'),
+(184, 3, '2104030802', 'AFP Ccrecer, S.A.'),
+(185, 3, '2104030803', 'ISSS pensiones'),
+(186, 3, '2104030804', 'I P S F A'),
+(187, 3, '21040309', 'Otras Retenciones'),
+(188, 3, '2105', 'Beneficios a Empleados por Pagar'),
+(189, 3, '210501', 'Beneficios a Corto Plazo por Pagar'),
+(190, 3, '21050101', 'Planillas de Sueldos por Pagar'),
+(191, 3, '21050102', 'Comisiones'),
+(192, 3, '21050103', 'Bonificaciones'),
+(193, 3, '21050104', 'Vacaciones'),
+(194, 3, '21050105', 'Aguinaldo'),
+(195, 3, '21050106', 'Aportes Patronales ISSS'),
+(196, 3, '210502', 'Beneficios Post-Empleo por Pagar'),
+(197, 3, '21050201', 'Aportaciones Patronales Pensiones Gubernamentales'),
+(198, 3, '21050202', 'ISSS - Cuota Patronal'),
+(199, 3, '210503', 'Aportaciones Patronales Pensiones no Gubernamental'),
+(200, 3, '21050301', 'AFP - Cuota Patronal'),
+(201, 3, '2105030101', 'AFP Confia, S.A.'),
+(202, 3, '2105030102', 'AFP Ccrecer, S.A.'),
+(203, 3, '2105030103', 'ISSS pensiones'),
+(204, 3, '2105030104', 'I P S F A'),
+(205, 3, '210504', 'Aportaciones Patronales Pensiones Multiempresa'),
+(206, 3, '21050401', 'Seguro Dotal por Pagar'),
+(207, 3, '2106', 'Débito Fiscal - IVA'),
+(208, 3, '210601', 'Débito Fiscal - IVA'),
+(209, 3, '21060101', 'Contribuyentes'),
+(210, 3, '21060102', 'Consumidores Finales'),
+(211, 3, '2107', 'Dividendos por Pagar'),
+(212, 3, '2108', 'Impuestos por Pagar'),
+(213, 3, '210801', 'ISR Por Pagar Corriente'),
+(214, 3, '210802', 'Pasivo Diferido por ISR'),
+(215, 3, '210803', 'Impuestos Municipales'),
+(216, 3, '210804', 'Pago a Cuenta'),
+(217, 3, '210805', 'IVA por Pagar'),
+(218, 3, '210806', '1% IVA Retenido a Contribuyentes'),
+(219, 3, '210807', '1% IVA Percibido a Contribuyentes'),
+(220, 3, '2109', 'Partes Relacionadas'),
+(221, 3, '210901', 'Directores, Ejecutivos y Empleados'),
+(222, 3, '210902', 'Compañías Afiliadas'),
+(223, 3, '210903', 'Compañías Asociadas'),
+(224, 3, '210904', 'Compañías Subsidiarias'),
+(225, 3, '210905', 'Compañias Relacionadas'),
+(226, 4, '2201', 'Préstamos Bancarios a Largo Plazo'),
+(227, 4, '220101', 'Préstamos Hipotecarios Largo Plazo'),
+(228, 4, '220102', 'Deuda Convertible a Largo Plazo'),
+(229, 4, '220103', 'Prestamos a Largo Plazo No Bancarios'),
+(230, 4, '22010301', 'Maria Guadalupe Iraheta de Martinez'),
+(231, 4, '22010302', 'Gilda Esperanza Lopez'),
+(232, 4, '2202', 'Obligaciones Bajo Arrendamiento Financiero a Largo'),
+(233, 4, '220201', 'Contratos Bajo Arrendamiento Financiero Largo Plaz'),
+(234, 4, '2203', 'Anticipos y Garantías de Clientes'),
+(235, 4, '220301', 'Anticipo de Clientes'),
+(236, 4, '220302', 'Garantías de Clientes'),
+(237, 4, '220303', 'Anticipos por otorgamiento de creditos'),
+(238, 4, '2204', 'Provisión para Obligaciones Laborales'),
+(239, 4, '220401', 'Indemnizaciones'),
+(240, 4, '220402', 'Vacaciones'),
+(241, 4, '220403', 'Aguinaldos'),
+(242, 5, '31', 'Capital'),
+(243, 5, '3101', 'Capital Social'),
+(244, 5, '310101', 'Capital Social-Mínimo'),
+(245, 5, '31010101', 'Capital Social Minimo Suscrito y Pagado'),
+(246, 5, '31010102', 'Capital Social Minimo Suscrito y No Pagado'),
+(247, 5, '310102', 'Capital Social- Variable'),
+(248, 5, '310103- R', 'Acciones en Tesorería'),
+(249, 6, '3201', 'Superávit por Revaluos de Activos'),
+(250, 6, '320101', 'Superávit por Revalúos de Terrenos'),
+(251, 6, '320102', 'Superávit por Revalúos de Instalaciones Permanente'),
+(252, 6, '320103', 'Superávit por Revalúos de Mobiliario y Equipo Sala'),
+(253, 6, '320104', 'Superávit por Revalúos de Equipo de Transporte'),
+(254, 6, '320105', 'Superávit por Revalúos de Equipo de Cómputo'),
+(255, 6, '320106', 'Superávit por Revalúos de Activos Intangibles'),
+(256, 7, '3301', 'Utilidades Restringidas'),
+(257, 7, '330101', 'Reserva Legal'),
+(258, 7, '3302', 'Utilidades no Distribuidas'),
+(259, 7, '330201', 'Utilidades de Ejercicio Anteriores'),
+(260, 7, '330202', 'Utilidades de Ejercicio'),
+(261, 7, '3303-R', 'Déficit Acumulado'),
+(262, 7, '3303-R-01', 'Pérdidas de Ejercicio Anteriores'),
+(263, 7, '3303-R-02', 'Pérdidas de Ejercicio'),
+(264, 7, '3304', 'Otras Reservas'),
+(265, 7, '330401', 'Voluntarias'),
+(266, 8, '4101', 'Costos de Ventas de Mercaderias y Servicios'),
+(267, 8, '410101', 'Costo de Venta de Mercaderías'),
+(268, 8, '410102', 'Costo de Servicios'),
+(269, 8, '4102', 'Gastos de Ventas'),
+(270, 8, '410201', 'Remuneraciones Laborales'),
+(271, 8, '41020101', 'Sueldos y Horas Extras'),
+(272, 8, '41020102', 'Comisiones'),
+(273, 8, '41020103', 'Bonificaciones'),
+(274, 8, '41020104', 'Aguinaldos'),
+(275, 8, '41020105', 'Vacaciones'),
+(276, 8, '41020106', 'Otras Remuneraciones laborales'),
+(277, 8, '410202', 'Beneficios a Empleados'),
+(278, 8, '41020201', 'Aporte por Seguridad Social de Salud (ISSS)'),
+(279, 8, '41020202', 'Aporte al Fondo de Pensiones (AFP`s)'),
+(280, 8, '41020203', 'Indemnizaciones'),
+(281, 8, '41020204', 'Atenciones al Personal'),
+(282, 8, '41020205', 'Uniformes y Accesorios'),
+(283, 8, '41020206', 'Gastos de Viajes y representaciones'),
+(284, 8, '41020207', 'Regalías y Otros'),
+(285, 8, '410203', 'Honorarios'),
+(286, 8, '41020301', 'Honorarios Profesionales'),
+(287, 8, '41020302', 'Honorarios Técnicos'),
+(288, 8, '41020303', 'Honorarios por Servicios Judiciales'),
+(289, 8, '410204', 'Mantenimientos'),
+(290, 8, '41020401', 'Mantenimientos Equipo de Oficina'),
+(291, 8, '41020402', 'Mantenimientos Mobiliario y Equipo'),
+(292, 8, '41020403', 'Mantenimientos Equipo de Transportes'),
+(293, 8, '41020404', 'Mantenimientos de Locales'),
+(294, 8, '410205', 'Impuestos, Tasas y Derechos Registrales'),
+(295, 8, '41020501', 'Impuestos y tasas municipales'),
+(296, 8, '41020502', 'Impuestos Fiscales'),
+(297, 8, '41020503', 'Derechos de Registro en CNR'),
+(298, 8, '41020504', 'Impuestos al combustible'),
+(299, 8, '410206', 'Energia Electrica'),
+(300, 8, '410207', 'Agua Potable'),
+(301, 8, '410208', 'Comunicaciones'),
+(302, 8, '41020801', 'Telefonia Fija'),
+(303, 8, '41020802', 'Telefonica Movil'),
+(304, 8, '41020803', 'Servicios de Cable y Correo'),
+(305, 8, '41020804', 'Otros Servicios de Comunicación'),
+(306, 8, '410209', 'Depreciacion y Amortizaciones'),
+(307, 8, '410210', 'Papelería y Utiles'),
+(308, 8, '410211', 'Transportes y Viaticos'),
+(309, 8, '410212', 'Combustible y Lubricantes'),
+(310, 8, '410213', 'Publicidad y Propaganda'),
+(311, 8, '410214', 'Cuotas y Suscripciones'),
+(312, 8, '410215', 'Seguridad y Vigilancia'),
+(313, 8, '41021501', 'Servicios de Seguridad'),
+(314, 8, '41021502', 'Servicios de Monitoreo'),
+(315, 8, '410216', 'Donaciones y Contribuciones'),
+(316, 8, '410217', 'Materiales de Empaque'),
+(317, 8, '410218', 'Multas y Recargos'),
+(318, 8, '410219', 'Varios'),
+(319, 8, '410222', 'Alquileres'),
+(320, 8, '41022201', 'Alquiler de Inmuebles'),
+(321, 8, '4103', 'Gastos de Administración'),
+(322, 8, '410301', 'Remuneraciones Laborales'),
+(323, 8, '41030101', 'Sueldos y Horas Extras'),
+(324, 8, '41030102', 'Comisiones'),
+(325, 8, '41030103', 'Bonificaciones'),
+(326, 8, '41030104', 'Aguinaldos'),
+(327, 8, '41030105', 'Vacaciones'),
+(328, 8, '41030106', 'Otras Remuneraciones laborales'),
+(329, 8, '410302', 'Beneficios a Empleados'),
+(330, 8, '41030201', 'Aporte por Seguridad Social de Salud (ISSS)'),
+(331, 8, '41030202', 'Aporte al Fondo de Pensiones (AFP`s)'),
+(332, 8, '41030203', 'Indemnizaciones'),
+(333, 8, '41030204', 'Atenciones al Personal'),
+(334, 8, '41030205', 'Uniformes y Accesorios'),
+(335, 8, '41030206', 'Gastos de Viajes y Representaciones'),
+(336, 8, '41030207', 'Regalías y Otros'),
+(337, 8, '410303', 'Honorarios'),
+(338, 8, '41030301', 'Honorarios Profesionales'),
+(339, 8, '41030302', 'Honorarios Técnicos'),
+(340, 8, '410304', 'Mantenimientos'),
+(341, 8, '41030401', 'Mantenimientos Equipo de Oficina'),
+(342, 8, '41030402', 'Mantenimientos Mobiliario y Equipo'),
+(343, 8, '41030403', 'Mantenimientos Equipo de Transportes'),
+(344, 8, '41030404', 'Mantenimientos de Locales'),
+(345, 8, '410305', 'Impuestos, Tasas y Derechos Registrales'),
+(346, 8, '41030501', 'Impuestos y tasas municipales'),
+(347, 8, '41030502', 'Impuestos Fiscales'),
+(348, 8, '41030503', 'Derechos de Registro en CNR'),
+(349, 8, '41030504', 'Impuestos al combustible'),
+(350, 8, '410306', 'Energia Electrica'),
+(351, 8, '410307', 'Agua Potable'),
+(352, 8, '410308', 'Comunicaciones'),
+(353, 8, '41030801', 'Telefonia Fija'),
+(354, 8, '41030802', 'Telefonica Movil'),
+(355, 8, '41030803', 'Servicios de Cable y Correo'),
+(356, 8, '41030804', 'Otros Servicios de Comunicación'),
+(357, 8, '410309', 'Depreciacion y Amortizaciones'),
+(358, 8, '410310', 'Papelería y Utiles'),
+(359, 8, '410311', 'Transportes y Viaticos'),
+(360, 8, '410312', 'Combustible y Lubricantes'),
+(361, 8, '410313', 'Publicidad y Propaganda'),
+(362, 8, '410314', 'Cuotas y Suscripciones'),
+(363, 8, '410315', 'Seguridad y Vigilancia'),
+(364, 8, '410316', 'Donaciones y Contribuciones'),
+(365, 8, '410317', 'Materiales de Empaque'),
+(366, 8, '410318', 'Multas y recargos'),
+(367, 8, '410319', 'Varios'),
+(368, 8, '410320', 'Gastos No Sujetos a ISR'),
+(369, 8, '410321', 'Articulos de limpieza varios'),
+(370, 8, '410322', 'Alquileres'),
+(371, 9, '4201', 'Gastos Financieros'),
+(372, 9, '420101', 'Intereses'),
+(373, 9, '420102', 'Comisiones Bancarias'),
+(374, 9, '420103', 'Otros Cargos Financieros'),
+(375, 9, '4202', 'Diferencial de Cambio'),
+(376, 9, '420201', 'Gastos de Diferencia de Cambio'),
+(377, 10, '4301', 'Pérdida en Venta de Activo Fijo'),
+(378, 10, '4302', 'Gastos por Siniestros'),
+(379, 11, '4401', 'Gastos de Operaciones en Discontinuación'),
+(380, 12, '5101', 'Ventas Comerciales'),
+(381, 12, '510101', 'Ventas Comerciales Gravadas'),
+(382, 12, '510102', 'Ventas Comerciales Exentas'),
+(383, 12, '5102', 'Ingresos por Servicios'),
+(384, 12, '510201', 'Intereses sobre prestamos'),
+(385, 12, '51020101', 'Intereses corrientes'),
+(386, 12, '51020102', 'Intereses por mora'),
+(387, 12, '510202', 'Comisiones y tarifas por servicios'),
+(388, 12, '51020201', 'Tramitaciones de prestamos'),
+(389, 12, '51020202', 'Honorarios por escrituraciones'),
+(390, 12, '51020203', 'Gestiones de cobranza'),
+(391, 12, '51020204', 'Comisiones y recargos sobre creditos'),
+(392, 12, '51020205', 'Servicios Varios'),
+(393, 12, '510204', 'Otros Servicios'),
+(394, 12, '5103', 'Otros Ingresos Operacionales'),
+(395, 12, '510301', 'Ingresos Diversos'),
+(396, 13, '5201', 'Intereses Ganados'),
+(397, 13, '520101', 'Intereses ganados en depositos'),
+(398, 13, '5202', 'Dividendos Ganados'),
+(399, 13, '5203', 'Ganancia en Venta de Activo Fijo'),
+(400, 13, '5204', 'Otros Ingresos'),
+(401, 13, '520401', 'Indemnizaciones por Reclamos de Seguros'),
+(402, 13, '520402', 'Ingresos varios'),
+(403, 14, '5301', 'Ingresos de Operaciones en Discontinuación'),
+(404, 15, '6101', 'Pérdidas y Ganancias');
 
 -- --------------------------------------------------------
 
@@ -612,17 +1059,18 @@ CREATE TABLE `tbl_menu` (
 --
 
 INSERT INTO `tbl_menu` (`idMenu`, `menu`, `html`, `estado`, `fechaRegistro`) VALUES
-(1, 'Clientes', '<li class=\'has_sub\'>                                 \r\n\r\n  <a href=\'#\' class=\'waves-effect\'><i class=\'fa fa-user-o fa-lg\'></i><span>Clientes</span><span class=\'pull-right\'><i class=\'md md-keyboard-arrow-down\'></i></span></a>                                 \r\n\r\n  <ul class=\'list-unstyled\'>                                     \r\n\r\n    <li><a href=\'http://192.168.1.100/fast-cash/Clientes/\'>Nuevo cliente</a></li>\r\n\r\n    <li><a href=\'http://192.168.1.100/fast-cash/Clientes/gestionarCliente\'>Clientes</a></li>                    \r\n\r\n  </ul>\r\n\r\n</li>', 1, '2018-11-21 20:56:45'),
-(2, 'Solicitud', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-book fa-lg\"></i><span>Solicitud</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"#\" data-toggle=\"modal\" data-target=\".modal_opcion_solicitud\">Nueva solicitud</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Solicitud/\">Solicitudes</a></li>\r\n        <!-- <li><a href=\"http://192.168.1.100/fast-cash/EstadosSolicitud/\">Gesctionar estados de la solicitud</a></li> -->\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Solicitud/gestionarPlazos\">Plazos</a></li>\r\n    </ul>\r\n</li>', 1, '2018-11-21 21:02:26'),
-(3, 'Creditos', '<li>\r\n   <a href=\"http://192.168.1.100/fast-cash/Creditos\" class=\"waves-effect\"><i class=\"fa fa-list-alt fa-lg\"></i><span>Créditos</span></a>\r\n</li>', 1, '2018-11-21 21:03:21'),
-(4, 'Pagos', '<li>\r\n   <a href=\"#\" class=\"waves-effect\" data-toggle=\"modal\" data-target=\".modal_opcion_pagos\"><i class=\"fa fa-usd fa-lg\"></i><span>Pagos</span></a>\r\n</li>\r\n', 1, '2018-12-26 19:12:28'),
-(5, 'Empleados', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-user-plus fa-lg\" ></i><span>Empleados</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Empleados/ViewInsertarEmpleados\">Nuevo empleado</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Empleados/Index\">Empleados</a></li>\r\n    </ul>\r\n</li>', 1, '2018-11-21 21:04:48'),
-(6, 'Caja', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-cube fa-lg\" ></i><span>Caja</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://192.168.1.100/fast-cash/CajaChica/\" class=\"waves-effect\"><span>Caja General</span></a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/CajaChica/CajaChica\" class=\"waves-effect\"><span>Caja Chica</span></a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/CajaChica/HistorialCajas\" class=\"waves-effect\"><span>Historial</span></a></li>\r\n    </ul>\r\n</li>', 1, '2018-11-21 21:19:25'),
-(7, 'Proveedores', '<li>\r\n    <a href=\"http://192.168.1.100/fast-cash/Proveedores/\" class=\"waves-effect\"><i class=\"ion-android-contacts\"></i><span> Proveedores </span></a>\r\n</li>', 1, '2018-11-21 21:19:25'),
-(8, 'Configuración', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-cog\" ></i><span>Configuración</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://192.168.1.100/fast-cash/User/\">Usuarios</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Accesos/\">Roles</a></li>\r\n         <li><a href=\"http://192.168.1.100/fast-cash/Rol/\">Permisos</a></li>\r\n    </ul>\r\n</li>', 1, '2018-11-21 21:05:53'),
-(10, 'Empresa', '<li>\r\n    <a href=\"http://192.168.1.100/fast-cash/Empresa/\" class=\"waves-effect\"><i class=\"fa fa-university fa-lg\"></i><span> Empresa </span></a>\r\n</li>', 1, '2018-11-21 21:19:45'),
-(11, 'Reportes', '<li class=\"has_sub\">\r\n  <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-book fa-lg\"></i><span>Reportes</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Reportes/General/1\">General</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Reportes/CreditosPendientes/1\">Creditos Pendientes</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Reportes/CreditosVencidos/1\">Creditos Vencidos</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Reportes/CreditosMorosos/1\">Créditos Morosos</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Reportes/CreditosSaldados/1\">Créditos Saldados</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Reportes/ReporteIva/1\">Reporte de IVA</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Reportes/ResumenIva/1\">Resumen de IVA</a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Reportes/Infored\">INFORED</a></li>\r\n    </ul>\r\n</li>', 1, '2019-02-20 20:01:01'),
-(12, 'Facturación', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-cube\" ></i><span>Facturación</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Facturas/\" class=\"waves-effect\"><span>Historial facturas</span></a></li>\r\n        <li><a href=\"http://192.168.1.100/fast-cash/Facturas/FacturarCreditosPopulares\" class=\"waves-effect\"><span>Facturar creditos populares</span></a></li>\r\n    </ul>\r\n</li>', 1, '2019-02-28 19:41:22');
+(1, 'Contaduría', '<li class=\"has_sub\">\r\n    <a href=\"javascript:void(0);\" class=\"waves-effect\"><i class=\"ion ion-social-buffer\"style=\"font-size: 25px; color: blue;\"></i><span style=\"color: blue; font-weight: bold;\">Contaduría</span><span class=\"pull-right\"><i class=\"md md-keyboard-arrow-down\"></i></span></a>\r\n    <ul>\r\n        <!-- <li class=\"has_sub\">\r\n            <a href=\"javascript:void(0);\" class=\"waves-effect\"><span>Menu Level 1.1</span> <span class=\"pull-right\"><i class=\"md md-add\"></i></span></a>\r\n            <ul style=\"\">\r\n                <li><a href=\"javascript:void(0);\"><span>Menu Level 2.1</span></a></li>\r\n            </ul>\r\n        </li>\r\n        <li class=\"has_sub\">\r\n            <a href=\"javascript:void(0);\" class=\"waves-effect\"><span>Menu Level 1.1</span> <span class=\"pull-right\"><i class=\"md md-add\"></i></span></a>\r\n            <ul style=\"\">\r\n                <li><a href=\"javascript:void(0);\"><span>Menu Level 2.1</span></a></li>\r\n            </ul>\r\n        </li>\r\n        <li>\r\n            <a href=\"javascript:void(0);\"><span>Menu Level 1.2</span></a>\r\n        </li> -->\r\n        <li>\r\n           <a href=\"http://localhost/www/fast-cashv3.0/Contabilidad\" class=\"waves-effect\">Nueva partida</a>\r\n        </li>\r\n    </ul>\r\n</li>', 1, '2019-03-16 20:32:37'),
+(2, 'Clientes', '<li class=\'has_sub\'>                                 \r\n\r\n  <a href=\'#\' class=\'waves-effect\'><i class=\'fa fa-user-o\'></i><span>Clientes</span><span class=\'pull-right\'><i class=\'md md-keyboard-arrow-down\'></i></span></a>                                 \r\n\r\n  <ul class=\'list-unstyled\'>                                     \r\n\r\n    <li><a href=\'http://localhost/www/fast-cashv3.0/Clientes/\'>Nuevo cliente</a></li>\r\n\r\n    <li><a href=\'http://localhost/www/fast-cashv3.0/Clientes/gestionarCliente\'>Clientes</a></li>                    \r\n\r\n  </ul>\r\n\r\n</li>', 1, '2018-11-22 02:56:45'),
+(3, 'Solicitud', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-address-card-o\"></i><span>Solicitud</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"#\" data-toggle=\"modal\" data-target=\".modal_opcion_solicitud\">Nueva solicitud</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Solicitud/\">Solicitudes</a></li>\r\n        <!-- <li><a href=\"http://localhost/www/fast-cashv3.0/EstadosSolicitud/\">Gesctionar estados de la solicitud</a></li> -->\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Solicitud/gestionarPlazos\">Plazos</a></li>\r\n    </ul>\r\n</li>', 1, '2018-11-22 03:02:26'),
+(4, 'Creditos', '<li>\r\n   <a href=\"http://localhost/www/fast-cashv3.0/Creditos\" class=\"waves-effect\"><i class=\"fa fa-list-alt fa-lg\"></i><span>Créditos</span></a>\r\n</li>', 1, '2018-11-22 03:03:21'),
+(5, 'Pagos', '<li>\r\n   <a href=\"#\" class=\"waves-effect\" data-toggle=\"modal\" data-target=\".modal_opcion_pagos\"><i class=\"ion ion-cash\" style=\"font-size: 26px;\"></i><span>Pagos</span></a>\r\n</li>\r\n', 1, '2018-12-27 01:12:28'),
+(6, 'Empleados', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"ion ion-android-social\" style=\"font-size:24px;\"></i><span>Empleados</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Empleados/ViewInsertarEmpleados\">Nuevo empleado</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Empleados/Index\">Empleados</a></li>\r\n    </ul>\r\n</li>', 1, '2018-11-22 03:04:48'),
+(7, 'Caja', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"ion ion-android-inbox\" ></i><span>Caja</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/CajaChica/\" class=\"waves-effect\"><span>Caja General</span></a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/CajaChica/CajaChica\" class=\"waves-effect\"><span>Caja Chica</span></a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/CajaChica/HistorialCajas\" class=\"waves-effect\"><span>Historial</span></a></li>\r\n    </ul>\r\n</li>', 1, '2018-11-22 03:19:25'),
+(8, 'Proveedores', '<li>\r\n    <a href=\"http://localhost/www/fast-cashv3.0/Proveedores/\" class=\"waves-effect\"><i class=\"ion-android-contacts\"></i><span> Proveedores </span></a>\r\n</li>', 1, '2018-11-22 03:19:25'),
+(9, 'Configuración', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-cog\" ></i><span>Configuración</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/User/\">Usuarios</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Accesos/\">Roles</a></li>\r\n         <li><a href=\"http://localhost/www/fast-cashv3.0/Rol/\">Permisos</a></li>\r\n    </ul>\r\n</li>', 1, '2018-11-22 03:05:53'),
+(10, 'Empresa', '<li>\r\n    <a href=\"http://localhost/www/fast-cashv3.0/Empresa/\" class=\"waves-effect\"><i class=\"fa fa-university\"></i><span> Empresa </span></a>\r\n</li>', 1, '2018-11-22 03:19:45'),
+(11, 'Reportes', '<li class=\"has_sub\">\r\n  <a href=\"#\" class=\"waves-effect\"><i class=\"ion ion-clipboard\" style=\"font-size: 28px;\"></i><span>Reportes</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Reportes/General/1\">General</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Reportes/CreditosPendientes/1\">Creditos Pendientes</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Reportes/CreditosVencidos/1\">Creditos Vencidos</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Reportes/CreditosMorosos/1\">Créditos Morosos</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Reportes/CreditosSaldados/1\">Créditos Saldados</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Reportes/ReporteIva/1\">Reporte de IVA</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Reportes/ResumenIva/1\">Resumen de IVA</a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Reportes/Infored\">INFORED</a></li>\r\n    </ul>\r\n</li>', 1, '2019-02-21 02:01:01'),
+(12, 'Facturación', '<li class=\"has_sub\">\r\n    <a href=\"#\" class=\"waves-effect\"><i class=\"fa fa-newspaper-o\" ></i><span>Facturación</span><span class=\"pull-right\"><i class=\"md  md-keyboard-arrow-down\"></i></span></a>\r\n    <ul class=\"list-unstyled\">\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Facturas/\" class=\"waves-effect\"><span>Historial facturas</span></a></li>\r\n        <li><a href=\"http://localhost/www/fast-cashv3.0/Facturas/FacturarCreditosPopulares\" class=\"waves-effect\"><span>Facturar creditos populares</span></a></li>\r\n    </ul>\r\n</li>', 1, '2019-03-01 01:41:22');
 
 -- --------------------------------------------------------
 
@@ -907,6 +1355,64 @@ INSERT INTO `tbl_municipios` (`Id_Municipio`, `Nombre_Municipio`, `Fk_Id_Departa
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tbl_partida`
+--
+
+CREATE TABLE `tbl_partida` (
+  `idPartida` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `debe` float NOT NULL,
+  `haber` float NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_partida`
+--
+
+INSERT INTO `tbl_partida` (`idPartida`, `idUsuario`, `debe`, `haber`, `descripcion`, `fecha`) VALUES
+(3, 5, 500, 500, 'Por prestamo a don Julian', '2019-03-08'),
+(6, 5, 200, 200, 'prueba', '2019-03-09'),
+(8, 5, 20.99, 20.99, 'este fallara', '2019-03-23'),
+(9, 5, 100, 100, 'Otra prueba we', '2019-03-08'),
+(10, 5, 80, 80, 'Por algo ', '2019-03-09');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_partida_cuentas`
+--
+
+CREATE TABLE `tbl_partida_cuentas` (
+  `idProceso` int(11) NOT NULL,
+  `idCuenta` int(11) NOT NULL,
+  `idPartida` int(11) NOT NULL,
+  `debe` float NOT NULL,
+  `haber` float NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_partida_cuentas`
+--
+
+INSERT INTO `tbl_partida_cuentas` (`idProceso`, `idCuenta`, `idPartida`, `debe`, `haber`, `fecha`) VALUES
+(4, 24, 3, 500, 0, '2019-03-08'),
+(5, 3, 3, 0, 400, '2019-03-08'),
+(6, 4, 3, 0, 100, '2019-03-08'),
+(9, 3, 6, 0, 200, '2019-03-09'),
+(10, 3, 6, 200, 0, '2019-03-09'),
+(12, 2, 8, 20.99, 0, '2019-03-23'),
+(13, 2, 8, 0, 20.99, '2019-03-23'),
+(14, 2, 9, 100, 0, '2019-03-08'),
+(15, 2, 9, 0, 100, '2019-03-08'),
+(16, 3, 10, 80, 0, '2019-03-09'),
+(17, 18, 10, 0, 80, '2019-03-09');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tbl_permisos`
 --
 
@@ -943,7 +1449,8 @@ INSERT INTO `tbl_permisos` (`idPermiso`, `permiso`, `estado`, `fechaRegistro`, `
 (43, 1, 1, '2019-01-07 19:39:11', 6, 11),
 (44, 1, 1, '2019-01-07 19:39:11', 7, 11),
 (45, 1, 1, '2019-02-20 20:03:05', 11, 5),
-(46, 1, 1, '2019-02-28 19:41:52', 12, 5);
+(46, 1, 1, '2019-02-28 19:41:52', 12, 5),
+(47, 1, 1, '2019-03-17 00:08:31', 9, 5);
 
 -- --------------------------------------------------------
 
@@ -1039,6 +1546,40 @@ INSERT INTO `tbl_solicitudes` (`idSolicitud`, `codigoSolicitud`, `fechaRecibido`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tbl_subcategoria_cuenta`
+--
+
+CREATE TABLE `tbl_subcategoria_cuenta` (
+  `idSubcategoria` int(11) NOT NULL,
+  `idCategoria` int(11) NOT NULL,
+  `codigoSubcategoria` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
+  `nombreSubcategoria` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_subcategoria_cuenta`
+--
+
+INSERT INTO `tbl_subcategoria_cuenta` (`idSubcategoria`, `idCategoria`, `codigoSubcategoria`, `nombreSubcategoria`) VALUES
+(1, 1, '11', 'ACTIVO CORRIENTE'),
+(2, 1, '12', 'ACTIVO NO CORRIENTE'),
+(3, 2, '21', 'PASIVO CORRIENTE'),
+(4, 2, '22', 'PASIVO NO CORRIENTE'),
+(5, 3, '31', 'CAPITAL'),
+(6, 3, '32', 'SUPERÁVIT POR REVALUACIONES'),
+(7, 3, '33', 'RESULTADOS ACUMULADOS'),
+(8, 4, '41', 'COSTOS DE VENTAS Y SERVICIOS'),
+(9, 4, '42', 'GASTOS NO OPERACIONALES'),
+(10, 4, '43', 'RESULTADO EXTRAORDINARIO DEUDOR'),
+(11, 4, '44', 'OPERACIONES EN DISCONTINUACIÓN DEUDORES'),
+(12, 5, '51', 'INGRESOS POR OPERACIONES CONTINUAS'),
+(13, 5, '52', 'OTROS INGRESOS NO OPERACIONALES'),
+(14, 5, '53', 'OPERACIONES EN DISCONTINUACIÓN ACREEDORAS'),
+(15, 6, '61', 'PÉRDIDAS Y GANANCIAS');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tbl_tipo_pago`
 --
 
@@ -1077,7 +1618,7 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`idUser`, `user`, `pass`, `idEmpleado`, `idAcceso`, `estado`, `fechaRegistro`) VALUES
-(4, 'JAIRAHETA', 'JU0312', 5, 5, 1, '2018-12-01 00:11:34'),
+(4, 'admin', 'admin', 5, 5, 1, '2018-12-01 00:11:34'),
 (5, 'JONATAN', '123456', 6, 10, 1, '2018-12-26 06:00:00'),
 (6, 'CAJERA', '02211', 7, 11, 1, '2019-01-07 06:00:00');
 
@@ -1304,7 +1845,7 @@ ALTER TABLE `tbl_accesos`
 -- AUTO_INCREMENT de la tabla `tbl_amortizaciones`
 --
 ALTER TABLE `tbl_amortizaciones`
-  MODIFY `idAmortizacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `idAmortizacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_aranceles`
@@ -1340,13 +1881,13 @@ ALTER TABLE `tbl_caja_general`
 -- AUTO_INCREMENT de la tabla `tbl_clientes`
 --
 ALTER TABLE `tbl_clientes`
-  MODIFY `Id_Cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `Id_Cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_creditos`
 --
 ALTER TABLE `tbl_creditos`
-  MODIFY `idCredito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idCredito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_departamentos`
@@ -1358,7 +1899,7 @@ ALTER TABLE `tbl_departamentos`
 -- AUTO_INCREMENT de la tabla `tbl_detallepagos`
 --
 ALTER TABLE `tbl_detallepagos`
-  MODIFY `idDetallePago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idDetallePago` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_documentos`
@@ -1388,13 +1929,13 @@ ALTER TABLE `tbl_estados_solicitud`
 -- AUTO_INCREMENT de la tabla `tbl_factura`
 --
 ALTER TABLE `tbl_factura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_fiadores`
 --
 ALTER TABLE `tbl_fiadores`
-  MODIFY `idFiador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idFiador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_garantias`
@@ -1412,7 +1953,7 @@ ALTER TABLE `tbl_hipotecas`
 -- AUTO_INCREMENT de la tabla `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
-  MODIFY `idMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idMenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_municipios`
@@ -1424,7 +1965,7 @@ ALTER TABLE `tbl_municipios`
 -- AUTO_INCREMENT de la tabla `tbl_permisos`
 --
 ALTER TABLE `tbl_permisos`
-  MODIFY `idPermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `idPermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_plazos_prestamos`
@@ -1442,7 +1983,7 @@ ALTER TABLE `tbl_proveedores`
 -- AUTO_INCREMENT de la tabla `tbl_solicitudes`
 --
 ALTER TABLE `tbl_solicitudes`
-  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `idSolicitud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_tipo_pago`

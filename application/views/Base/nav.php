@@ -70,7 +70,7 @@
                             else{
                                 mysqli_query($conn, "SET CHARACTER SET 'utf8'");
                                 $acceso = $this->session->userdata("idAcceso");
-                                $consulta = "SELECT m.html FROM tbl_permisos as p INNER JOIN tbl_accesos as a ON p.idAcceso = a.idAcceso INNER JOIN tbl_menu as m ON p.idMenu = m.idMenu WHERE p.idAcceso = '$acceso' AND p.permiso = '1'";
+                                $consulta = "SELECT m.html, m.idMenu FROM tbl_permisos as p INNER JOIN tbl_accesos as a ON p.idAcceso = a.idAcceso INNER JOIN tbl_menu as m ON p.idMenu = m.idMenu WHERE p.idAcceso = '$acceso' AND p.permiso = '1' ORDER BY idMenu ASC";
                                 $datos =  mysqli_query( $conn, $consulta);  
                                 while($item = mysqli_fetch_array($datos)){echo $item["html"];}
                             }
