@@ -38,7 +38,7 @@ class PartidasModel extends CI_Model
 				{
 					if ($debe[$i] == 0)
 					{
-						$sql3 = "INSERT INTO tbl_partida_cuentas VALUES('', '$cuenta[$i]', '$idParti', '0', '$haber[$i]')";
+						$sql3 = "INSERT INTO tbl_partida_cuentas VALUES('', '$cuenta[$i]', '$idParti', '0', '$haber[$i]', '$fecha')";
 						if ($this->db->query($sql3))
 						{
 							$contador++;
@@ -46,7 +46,7 @@ class PartidasModel extends CI_Model
 					}
 					else
 					{
-						$sql3 = "INSERT INTO tbl_partida_cuentas VALUES('', '$cuenta[$i]', '$idParti', '$debe[$i]', '0')";
+						$sql3 = "INSERT INTO tbl_partida_cuentas VALUES('', '$cuenta[$i]', '$idParti', '$debe[$i]', '0', '$fecha')";
 						if ($this->db->query($sql3))
 						{
 							$contador++;
@@ -63,9 +63,9 @@ class PartidasModel extends CI_Model
 
 	}
 
-	public function LibroDiario()
+	public function LibroDiario($i, $f)
 	{
-		$sql = "SELECT * FROM tbl_partida";
+		$sql = "SELECT * FROM tbl_partida WHERE DATE(fecha) BETWEEN '$i' AND '$f'";
 		$datos = $this->db->query($sql);
 		return $datos;
 	}
@@ -77,18 +77,18 @@ class PartidasModel extends CI_Model
 		return $datos;
 	}
 
-	public function LibroMayor()
+	public function LibroMayor($i, $f)
 	{
-		// $sql = "SELECT DISTINCT(pc.idCuenta), c.NombreCuenta, pc.idPartida FROM tbl_partida_cuentas as pc INNER JOIN tbl_cuenta as c ON(pc.idCuenta = c.idCuenta)";
-		$sql ="SELECT DISTINCT(pc.idCuenta), pc.idPartida, c.NombreCuenta FROM tbl_partida_cuentas as pc INNER JOIN tbl_cuenta as c ON(pc.idCuenta = c.idCuenta) GROUP BY pc.idCuenta";
+		// $sql = "SELECT c.idCuenta, c.NombreCuenta, c.codigoCuenta, pc.debe, pc.haber, c.idSubcategoria, p.idPartida FROM tbl_partida_cuentas as pc INNER JOIN tbl_cuenta as c ON(pc.idCuenta=c.idCuenta) INNER JOIN tbl_partida as p ON(pc.idPartida = p.idPartida) WHERE pc.idPartida='$id'";
+		$sql ="SELECT DISTINCT(pc.idCuenta), pc.idPartida, c.NombreCuenta FROM tbl_partida_cuentas as pc INNER JOIN tbl_cuenta as c ON(pc.idCuenta = c.idCuenta) WHERE DATE(pc.fecha) BETWEEN '$i' AND '$f' GROUP BY pc.idCuenta";
 		$datos = $this->db->query($sql);
 		return $datos;
 	}
 
-	public function LibroMayorExtra($id)
+	public function LibroMayorExtra($id, $i, $f)
 	{
 		// $sql = "SELECT pc.idCuenta, c.NombreCuenta, pc.idPartida, pc.debe, pc.haber, pc.fecha FROM tbl_partida_cuentas as pc INNER JOIN tbl_cuenta as c ON(pc.idCuenta = c.idCuenta) WHERE pc.idPartida= '$id'";
-		$sql ="SELECT * FROM tbl_partida_cuentas WHERE idCuenta='$id'";
+		$sql ="SELECT * FROM tbl_partida_cuentas WHERE idCuenta='$id' AND DATE(fecha) BETWEEN '$i' AND '$f'";
 		$datos = $this->db->query($sql);
 		return $datos;
 	}

@@ -116,13 +116,13 @@
                                         <input type="hidden" value="0" id="totalDebe" name="totalDebe">
                                         <input type="hidden" value="0" id="totalHaber" name="totalHaber">
                                         <input type="hidden" value="" id="fechaPartidaE" name="fechaPartida">
-                                        <table class="table table_bordered">
+                                        <table class="">
                                             <tr id="frmPartida" style="display:none">
                                                 <td colspan="4">
                                                     <div class="row">
                                                       <div class="form-group col-md-12">
                                                             <label for="detalle_proceso">Detalle</label>
-                                                            <textarea class="form-control resize" rows="3" id="detalle_proceso" name="detalle_proceso"></textarea>
+                                                            <textarea class="form-control resize" rows="3" cols="135" id="detalle_proceso" name="detalle_proceso"></textarea>
                                                       </div>
                                                     </div>
                                                 </td>

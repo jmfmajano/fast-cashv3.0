@@ -45,6 +45,16 @@
                                 if (sizeof($datos->result()) > 0) 
                                 {
                             ?>
+
+                            <div class="row">
+                              <div class="col-sm-12">
+                                  <div class="pull-left"><h5>Resumen del <?=  $i ?> hasta <?=  $f ?></h5></div>
+                                  <div class="pull-right">
+                                    <a href="<?=  base_url() ?>Contabilidad/DetalleLibroMayor?i=<?=  $i ?>&&f=<?= $f ?>" class="btn btn-success">Ver Libro Mayor</a>
+                                    <a href="<?=  base_url() ?>Contabilidad/DetalleBalanceComprobacion?i=<?=  $i ?>&&f=<?= $f ?>" class="btn btn-danger">Ver balance de comprobacion</a>
+                                  </div>
+                              </div>
+                          </div>
                               <table class="table table-hovered">
                                   <tr>
                                       <th class="text-center alert-success"><strong>FECHA</strong></th>

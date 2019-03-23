@@ -19,20 +19,58 @@ class Contabilidad extends CI_Controller
 		$this->load->view('Base/footer');
 	}
 
-	public function LibroDiario()
+	public function DetalleLibroDiario()
 	{
-		$datos = $this->PartidasModel->LibroDiario();
-		$data = array('datos' => $datos );
+		if (isset($_GET['i']))
+		{
+			$i = $_GET['i'];
+			$f = $_GET['f'];
+		}
+		else
+		{
+			$datos = $this->input->post();
+			$i = $datos['fechaInicial'];
+			$f = $datos['fechaFinal'];
+		}
+		$datos = $this->PartidasModel->LibroDiario($i, $f);
+		$data = array('datos' => $datos, 'i' => $i, 'f' => $f);
 		$this->load->view('Base/header');
 		$this->load->view('Base/nav');
 		$this->load->view('Contabilidad/libro_diario', $data);
 		$this->load->view('Base/footer');
 	}
 
+	public function LibroDiario()
+	{
+		$this->load->view('Base/header');
+		$this->load->view('Base/nav');
+		$this->load->view('Contabilidad/view_rango_contabilidad');
+		$this->load->view('Base/footer');
+	}
+
 	public function LibroMayor()
 	{
-		$datos = $this->PartidasModel->LibroMayor()->result();
-		$data = array('datos' => $datos );
+		$this->load->view('Base/header');
+		$this->load->view('Base/nav');
+		$this->load->view('Contabilidad/view_rango_lmayor');
+		$this->load->view('Base/footer');
+	}
+
+	public function DetalleLibroMayor()
+	{
+		if (isset($_GET['i']))
+		{
+			$i = $_GET['i'];
+			$f = $_GET['f'];
+		}
+		else
+		{
+			$datos = $this->input->post();
+			$i = $datos['fechaInicial'];
+			$f = $datos['fechaFinal'];
+		}
+		$datos = $this->PartidasModel->LibroMayor($i, $f)->result();
+		$data = array('datos' => $datos, 'i' => $i, 'f' => $f);
 		$this->load->view('Base/header');
 		$this->load->view('Base/nav');
 		$this->load->view('Contabilidad/libro_mayor', $data);
@@ -41,8 +79,27 @@ class Contabilidad extends CI_Controller
 
 	public function BalanceComprobacion()
 	{
-		$datos = $this->PartidasModel->LibroMayor()->result();
-		$data = array('datos' => $datos );
+		$this->load->view('Base/header');
+		$this->load->view('Base/nav');
+		$this->load->view('Contabilidad/view_rango_bcomprobacion');
+		$this->load->view('Base/footer');
+	}
+
+	public function DetalleBalanceComprobacion()
+	{
+		if (isset($_GET['i']))
+		{
+			$i = $_GET['i'];
+			$f = $_GET['f'];
+		}
+		else
+		{
+			$datos = $this->input->post();
+			$i = $datos['fechaInicial'];
+			$f = $datos['fechaFinal'];
+		}
+		$datos = $this->PartidasModel->LibroMayor($i, $f)->result();
+		$data = array('datos' => $datos, 'i' => $i, 'f' => $f);
 		$this->load->view('Base/header');
 		$this->load->view('Base/nav');
 		$this->load->view('Contabilidad/balance_comprobacion', $data);
@@ -64,6 +121,7 @@ class Contabilidad extends CI_Controller
 		}
 		// var_dump($datos);
 	}
+
 
 
 }

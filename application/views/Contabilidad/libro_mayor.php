@@ -40,8 +40,19 @@
                         <div class="panel-heading"> 
                             <h3 class="panel-title">Libro mayor</h3> 
                         </div> 
-                        <div class="panel-body"> 
-                              <div class="row">
+                        <div class="panel-body">
+
+                        <div class="row">
+                              <div class="col-sm-12">
+                                  <div class="pull-left"><h5>Resumen del <?=  $i ?> hasta <?=  $f ?></h5></div>
+                                  <div class="pull-right">
+                                    <a href="<?=  base_url() ?>Contabilidad/DetalleLibroDiario?i=<?=  $i ?>&&f=<?= $f ?>" class="btn btn-success">Ver Libro Diario</a>
+                                    <a href="<?=  base_url() ?>Contabilidad/DetalleBalanceComprobacion?i=<?=  $i ?>&&f=<?= $f ?>" class="btn btn-danger">Ver balance de comprobacion</a>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
                           <?php
                             $totalDebe=0;
                             $totalHaber=0;
@@ -61,7 +72,7 @@
                                       <td><strong>Haber</strong></td>
                                     </tr>
                                     <?php 
-                                        $detalle = $this->PartidasModel->LibroMayorExtra($cuenta->idCuenta)->result();
+                                        $detalle = $this->PartidasModel->LibroMayorExtra($cuenta->idCuenta, $i, $f)->result();
                                         foreach ($detalle as $det)
                                         {
                                           $totalDebe = $totalDebe + $det->debe;
