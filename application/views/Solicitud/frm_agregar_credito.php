@@ -266,8 +266,14 @@
 
       if (TP=="popular")
       {
-        var dayOfMonth = dt.getMonth();
-        dt.setMonth(dayOfMonth + meses);
+        // var MonthOfYear = dt.getMonth();
+        // dt.setMonth(MonthOfYear + meses);
+
+        //Obteniendo el dia Actual
+        var DayOfTheMonth = dt.getDate();
+        // Sumandole los dias multiplicados por los meses ej: 2*30
+        dt.setDate(DayOfTheMonth + (meses*30));
+
         var month = dt.getMonth()+1;
         var day = dt.getDate();
         var year = dt.getFullYear();
