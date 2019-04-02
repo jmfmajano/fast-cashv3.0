@@ -47,13 +47,26 @@
                 $codigoSolicitud = '"'.$solicitud->codigoSolicitud.'"';
                 if ($solicitud->tiempo_plazo==1)
                 {
-                  $mes = 'mes';
+                  if (strlen(stristr($solicitud->tipoCredito,'popular'))>0) {
+                        $mes = 'mes';
+                      }
+                      else
+                      {
+                        $mes = 'año';
+                      }
+
                 }
                 else
                 {
                   if ($solicitud->tiempo_plazo > 1)
                   {
-                    $mes = 'meses';
+                    if (strlen(stristr($solicitud->tipoCredito,'popular'))>0) {
+                        $mes = 'meses';
+                      }
+                      else
+                      {
+                        $mes = 'años';
+                      }
                   }
                 }
               

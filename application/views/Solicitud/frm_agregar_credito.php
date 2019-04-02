@@ -280,8 +280,15 @@
       }
       else
       {
-        var aActual = dt.getFullYear();
-        dt.setFullYear(aActual + meses);
+        // var aActual = dt.getFullYear();
+        // dt.setFullYear(aActual + meses);
+
+        //Obteniendo el dia Actual
+        var DayOfTheMonth = dt.getDate();
+        // Sumandole los dias multiplicados por los meses ej: 2*30
+        dt.setDate(DayOfTheMonth + (meses*360));
+
+
         var month = dt.getMonth()+1;
         var day = dt.getDate();
         var year = dt.getFullYear();
